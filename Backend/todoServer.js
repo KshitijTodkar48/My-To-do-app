@@ -17,7 +17,7 @@ const todoSchema = new mongoose.Schema({
 
 const Todos = mongoose.model("To-dos", todoSchema) ;
 
-mongoose.connect("mongodb+srv://kshitijtodkar48:JH5AzqimSH5NhimV@cluster0.vd7pixy.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true, dbName: "Todo-App" });
+mongoose.connect("mongodb+srv://kshitijtodkar48:<password>.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true, dbName: "Todo-App" });
 
 app.post("/todos" , async (req , res) => {
    const { title, description } = req.body ;
