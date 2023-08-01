@@ -91,13 +91,17 @@ function App() {
                 }),
               }).then((response) =>
                 response.json().then((data) => {
-                  setTodos(data);
-                  setTitle("");
-                  setDescription("");
-                  setShowAlert(true);
-                  setTimeout(() => {
+                  console.log(data);
+                  if(data)
+                  {
+                    setTodos(data);
+                    setTitle("");
+                    setDescription("");
+                    setShowAlert(true);
+                    setTimeout(() => {
                     setShowAlert(false);
                   }, 2000);
+                  }
                 })
               );
             }}
