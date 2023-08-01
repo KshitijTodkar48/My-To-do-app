@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const { z } = require("zod");
 const PORT = 3000 ;
 const app = express();
 app.use(express.json());
@@ -19,7 +20,19 @@ const Todos = mongoose.model("To-dos", todoSchema) ;
 
 mongoose.connect("mongodb+srv://kshitijtodkar48:JH5AzqimSH5NhimV@cluster0.vd7pixy.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true, dbName: "Todo-App" });
 
+const toDoInput = z.object({
+  title: z.string(),
+  description: z.string(),
+})
+
 app.post("/todos" , async (req , res) => {
+   const parsedInput = toDoInput.safeParse(req.body) ;
+   if(!parsedInput.success)
+   {
+      return res.status(411).json({
+        message: "Invalid input"
+      })
+   }
    const { title, description } = req.body ;
    const todo = await Todos.findOne({ title, description }) ;
    if(todo)
